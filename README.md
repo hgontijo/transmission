@@ -1,8 +1,9 @@
-[![logo](https://raw.githubusercontent.com/dperson/transmission/master/logo.png)](https://www.transmissionbt.com/)
+[![logo](https://raw.githubusercontent.com/hgontijo/transmission/master/logo.png)](https://www.transmissionbt.com/)
 
 # Transmission
 
-Transmission docker container
+Transmission docker container.<br>
+This project is a clone of [dperson/transmission](https://github.com/dperson/transmission) since I needed a slightly different container, e.g. enable encryption by default.
 
 # What is Transmission?
 
@@ -18,23 +19,23 @@ filter (can be used with dperson/openvpn).
                 --dns 8.8.4.4 --dns 8.8.8.8 --restart=always \
                 -d dperson/openvpn-client ||
     sudo docker run --name bit --net=container:vpn \
-                -d dperson/transmission
+                -d hgontijo/transmission
     sudo docker run --name web -p 80:80 -p 443:443 --link vpn:bit \
                 -d dperson/nginx -w "http://bit:9091/transmission;/transmission"
 
 ## Hosting a Transmission instance
 
-    sudo docker run --name transmission -p 9091:9091 -d dperson/transmission
+    sudo docker run --name transmission -p 9091:9091 -d hgontijo/transmission
 
 OR set local storage:
 
     sudo docker run --name transmission -p 9091:9091 \
                 -v /path/to/directory:/var/lib/transmission-daemon/downloads \
-                -d dperson/transmission
+                -d hgontijo/transmission
 
 ## Configuration
 
-    sudo docker run -it --rm dperson/transmission -h
+    sudo docker run -it --rm hgontijo/transmission -h
 
     Usage: transmission.sh [-opt] [command]
     Options (fields in '[]' are optional, '<>' are required):
@@ -59,15 +60,15 @@ Any of the commands can be run at creation with `docker run` or later with
 
 ### Setting the Timezone
 
-    sudo docker run --name transmission -d dperson/transmission -t EST5EDT
+    sudo docker run --name transmission -d hgontijo/transmission -t EST5EDT
 
 OR using `environment variables`
 
-    sudo docker run --name transmission -e TZ=EST5EDT -d dperson/transmission
+    sudo docker run --name transmission -e TZ=EST5EDT -d hgontijo/transmission
 
 Will get you the same settings as
 
-    sudo docker run --name transmission -p 9091:9091 -d dperson/transmission
+    sudo docker run --name transmission -p 9091:9091 -d hgontijo/transmission
     sudo docker exec transmission transmission.sh -t EST5EDT \
                 ls -AlF /etc/localtime
     sudo docker restart transmission
@@ -77,4 +78,4 @@ Will get you the same settings as
 ## Issues
 
 If you have any problems with or questions about this image, please contact me
-through a [GitHub issue](https://github.com/dperson/transmission/issues).
+through a [GitHub issue](https://github.com/hgontijo/transmission/issues).

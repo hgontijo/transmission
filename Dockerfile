@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER David Personette <dperson@dperson.com>
+MAINTAINER Henrique Gontijo <henrique@gontijo.org>
 
 # Install transmission
 RUN export DEBIAN_FRONTEND='noninteractive' && \
